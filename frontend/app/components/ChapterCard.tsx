@@ -38,14 +38,12 @@ const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
   const IconComponent = PhosphorIcons[getChapterIcon(chapter.chapter)] as React.ElementType;
 
   return (
-    <div className="chapter-card">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-xl">
-            {IconComponent && typeof IconComponent === "function" ? (
-              <IconComponent size={24} weight="duotone" />
-            ) : null}
-          </span>
+<div className="chapter-card px-3 py-3 sm:px-4 sm:py-4">
+  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
+    <div className="flex items-center gap-2 sm:gap-3">
+      <span className="text-lg sm:text-xl">
+        <IconComponent size={20} className="sm:w-6 sm:h-6" weight="duotone" />
+      </span>
           <div>
             <h3 className="font-medium line-clamp-1">
               {chapter.chapter.length > 25 
@@ -90,3 +88,6 @@ const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
     </div>
   );
 };
+
+
+export default ChapterCard;

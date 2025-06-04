@@ -14,6 +14,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 const FilterControls = () => {
   const dispatch = useDispatch();
   const { filters, sortOrder } = useSelector((state: RootState) => state.chapters);
+  const chapterCount = getChapterCount(activeSubject, filters);
   
   // Mock data for classes and units - in real app these would come from filtered data
   const classes = ["Class 11", "Class 12"];
@@ -21,14 +22,14 @@ const FilterControls = () => {
   const statuses = ["Not Started", "Completed"];
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-4">
-          {/* Class Filter */}
-          <div className="relative group">
-            <button className="flex items-center gap-1 px-3 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-600">
-              Class
-              <ChevronDown className="w-4 h-4" />
+<div className="flex flex-col gap-4">
+  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div className="flex flex-wrap gap-2">
+      {/* Update filter buttons to be smaller on mobile */}
+      <div className="relative group">
+        <button className="flex items-center gap-1 px-2 py-1 text-xs sm:text-sm rounded-md border border-gray-300 dark:border-gray-600">
+          Class
+          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
             <div className="absolute z-10 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-md p-2 mt-1 min-w-[120px]">
               {classes.map((cls) => (
@@ -90,13 +91,13 @@ const FilterControls = () => {
         </div>
 
         {/* Sort Toggle */}
-        <button
-          className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400"
-          onClick={() => dispatch(toggleSortOrder())}
-        >
-          Showing all chapters (34)
-          {sortOrder === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-        </button>
+<button
+  className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400"
+  onClick={() => dispatch(toggleSortOrder())}
+>
+  Showing {chapterCount} chapters
+  {sortOrder === 'asc' ? <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4" /> : <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />}
+</button>
       </div>
     </div>
   );

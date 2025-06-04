@@ -1,24 +1,51 @@
 import React from 'react';
-import { Chapter } from '@/lib/types';
+import { Chapter } from '../lib/types';
 import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
+import * as PhosphorIcons from 'phosphor-react';
+
+// Type for Phosphor icons
+type PhosphorIcon = keyof typeof PhosphorIcons;
 
 const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
-  // Calculate trend for 2025 vs 2024
-  const trend2025 = chapter.yearWiseQuestionCount["2025"];
-  const trend2024 = chapter.yearWiseQuestionCount["2024"];
+  const trend2025 = chapter.yearWiseQuestionCount["2025"] || 0;
+  const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0;
   const trendDiff = trend2025 - trend2024;
   
-  // Get random icon - in real app we'd use phosphor icons
-  const randomIcon = () => {
-    const icons = ["📚", "🧪", "🔭", "🧮", "⚛️", "🔢"];
-    return icons[Math.floor(Math.random() * icons.length)];
+  // Map chapter names to icons
+  const getChapterIcon = (chapterName: string): PhosphorIcon => {
+    const iconMap: Record<string, PhosphorIcon> = {
+      "Gravitation": "Planet",
+      "Mathematics in Physics": "MathOperations",
+      "Units and Dimensions": "Ruler",
+      "Motion In One Dimension": "ArrowLineRight",
+      "Motion In Two Dimensions": "ArrowsOut",
+      "Laws of Motion": "Balloon",
+      "Work Power Energy": "BatteryHigh",
+      "Center of Mass Momentum and Collision": "CircleDashed",
+      "Rotational Motion": "CircleNotch",
+      "Mechanical Properties of Solids": "Cube",
+      "Mechanical Properties of Fluids": "Drop",
+      "Thermal Properties of Matter": "Thermometer",
+      "Thermodynamics": "Fire",
+      "Kinetic Theory of Gases": "Wind",
+      "Oscillations": "WaveSine",
+    };
+
+    const defaultIcon = "Book";
+    return iconMap[chapterName] || defaultIcon;
   };
+
+  const IconComponent = PhosphorIcons[getChapterIcon(chapter.chapter)] as React.ElementType;
 
   return (
     <div className="chapter-card">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-xl">{randomIcon()}</span>
+          <span className="text-xl">
+            {IconComponent && typeof IconComponent === "function" ? (
+              <IconComponent size={24} weight="duotone" />
+            ) : null}
+          </span>
           <div>
             <h3 className="font-medium line-clamp-1">
               {chapter.chapter.length > 25 
@@ -26,7 +53,7 @@ const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
                 : chapter.chapter}
             </h3>
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              <span>{chapter.questionSolved}/{chapter.yearWiseQuestionCount["2025"] + 190} Qs</span>
+              <span>{chapter.questionSolved}/{chapter.totalQuestions} Qs</span>
               <span className="flex items-center">
                 {trendDiff > 0 ? (
                   <>
@@ -63,5 +90,3 @@ const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
     </div>
   );
 };
-
-export default ChapterCard;

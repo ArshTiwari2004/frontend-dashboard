@@ -1,5 +1,6 @@
+import data from "@/assets/data/all_subjects_chapter_data.json";
 import { Chapter } from "./types";
-import { RootState } from "@/store/store";
+import { RootState } from "../store/store";
 
 export const getFilteredChapters = (
   activeSubject: string,
@@ -11,72 +12,77 @@ export const getFilteredChapters = (
   },
   sortOrder: "asc" | "desc"
 ): Chapter[] => {
-  // In a real app, this would fetch from your JSON data
-  // For now, we'll return mock data 
-  
-  const mockChapters: Chapter[] = [
-    {
-      chapter: "Gravitation",
-      class: "Class 11",
-      unit: "Mechanics 1",
-      yearWiseQuestionCount: {
-        "2024": 60,
-        "2025": 80,
-      },
-      questionSolved: 113,
-      totalQuestions: 205,
-      status: "Completed",
-      isWeakChapter: false,
-    },
-    {
-      chapter: "Math in Physics",
-      class: "Class 11",
-      unit: "Mechanics 1",
-      yearWiseQuestionCount: {
-        "2024": 60,
-        "2025": 20,
-      },
-      questionSolved: 113,
-      totalQuestions: 205,
-      status: "Completed",
-      isWeakChapter: false,
-    },
-    // Add more chapters as needed to match your screenshots
-  ];
+  // Filter by subject first
+  let filtered = data.filter((chapter) => chapter.subject === activeSubject);
 
-  return mockChapters
-    .filter((chapter) => {
-      // Filter by subject (though in our mock all are Physics)
-      // In real app, you'd filter by activeSubject
-      
-      // Filter by class
-      if (filters.class.length > 0 && !filters.class.includes(chapter.class)) {
-        return false;
-      }
-      
-      // Filter by unit
-      if (filters.unit.length > 0 && !filters.unit.includes(chapter.unit)) {
-        return false;
-      }
-      
-      // Filter by status
-      if (filters.status.length > 0 && !filters.status.includes(chapter.status)) {
-        return false;
-      }
-      
-      // Filter by weak chapters
-      if (filters.weakChapters && !chapter.isWeakChapter) {
-        return false;
-      }
-      
-      return true;
-    })
-    .sort((a, b) => {
-      // Simple sort by chapter name
-      if (sortOrder === "asc") {
-        return a.chapter.localeCompare(b.chapter);
-      } else {
-        return b.chapter.localeCompare(a.chapter);
-      }
-    });
+  // Calculate total questions for each chapter
+  filtered = filtered.map((chapter) => ({
+    ...chapter,
+    totalQuestions: Object.values(chapter.yearWiseQuestionCount).reduce((a, b) => a + b, 0),
+  }));
+
+  // Apply filters
+  filtered = filtered.filter((chapter) => {
+    // Filter by class
+    if (filters.class.length > 0 && !filters.class.includes(chapter.class)) {
+      return false;
+    }
+    
+    // Filter by unit
+    if (filters.unit.length > 0 && !filters.unit.includes(chapter.unit)) {
+      return false;
+    }
+    
+    // Filter by status
+    if (filters.status.length > 0 && !filters.status.includes(chapter.status)) {
+      return false;
+    }
+    
+    // Filter by weak chapters
+    if (filters.weakChapters && !chapter.isWeakChapter) {
+      return false;
+    }
+    
+    return true;
+  });
+
+  // Apply sorting
+  return filtered.sort((a, b) => {
+    if (sortOrder === "asc") {
+      return a.chapter.localeCompare(b.chapter);
+    } else {
+      return b.chapter.localeCompare(a.chapter);
+    }
+  });
+};
+
+// Get unique classes for current subject
+export const getUniqueClasses = (activeSubject: string) => {
+  return [...new Set(
+    data
+      .filter((chapter) => chapter.subject === activeSubject)
+      .map((chapter) => chapter.class)
+  )];
+};
+
+// Get unique units for current subject
+export const getUniqueUnits = (activeSubject: string) => {
+  return [...new Set(
+    data
+      .filter((chapter) => chapter.subject === activeSubject)
+      .map((chapter) => chapter.unit)
+  )];
+};
+
+// Get chapter count for display
+export const getChapterCount = (
+  activeSubject: string,
+  filters: {
+    class: string[];
+    unit: string[];
+    status: string[];
+    weakChapters: boolean;
+  }
+) => {
+  return getFilteredChapters(activeSubject, filters, "desc").length;
 };

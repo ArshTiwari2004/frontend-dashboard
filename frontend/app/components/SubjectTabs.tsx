@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
 import { setActiveSubject } from "../store/features/chaptersSlice"
 import type { RootState } from "../store/store"
@@ -11,17 +12,17 @@ const SubjectTabs = () => {
     {
       name: "Physics",
       label: "Phy",
-      bgColor: "bg-orange-500",
+      iconPath: "/physics.svg",
     },
     {
       name: "Chemistry",
       label: "Chem",
-      bgColor: "bg-green-500",
+      iconPath: "/chemistry.svg",
     },
     {
       name: "Mathematics",
       label: "Math",
-      bgColor: "bg-blue-500",
+      iconPath: "/mathematics.svg",
     },
   ]
 
@@ -30,19 +31,21 @@ const SubjectTabs = () => {
       {subjects.map((subject) => (
         <button
           key={subject.name}
-          className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 font-medium text-sm transition-colors ${
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => dispatch(setActiveSubject(subject.name as any))}
+          className={`flex-1 flex flex-col items-center justify-center px-4 py-3 font-medium text-sm transition-colors ${
             activeSubject === subject.name
               ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
               : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
           }`}
-           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onClick={() => dispatch(setActiveSubject(subject.name as any))}
         >
-          <div className={`w-6 h-6 rounded ${subject.bgColor} flex items-center justify-center`}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-              <circle cx="12" cy="12" r="2" />
-            </svg>
-          </div>
+          <Image
+            src={subject.iconPath}
+            alt={subject.label}
+            width={24}
+            height={24}
+            className="mb-1"
+          />
           {subject.label}
         </button>
       ))}

@@ -10,19 +10,21 @@ import {
 } from '../store/features/chaptersSlice';
 import { RootState } from '../store/store';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { getChapterCount, getUniqueClasses, getUniqueUnits } from '../lib/utils';
 
 const FilterControls = () => {
   const dispatch = useDispatch();
-  const { filters, sortOrder } = useSelector((state: RootState) => state.chapters);
-  const chapterCount = getChapterCount(activeSubject, filters);
+  const chaptersState = useSelector((state: RootState) => state.chapters);
+  const filters = chaptersState.filters;
+  const sortOrder = chaptersState.sortOrder;
   
-  // Mock data for classes and units - in real app these would come from filtered data
-  const classes = ["Class 11", "Class 12"];
-  const units = ["Mechanics 1", "Mechanics 2", "Thermodynamics"];
+  const classes = getUniqueClasses(chaptersState.activeSubject);
+  const units = getUniqueUnits(chaptersState.activeSubject);
   const statuses = ["Not Started", "Completed"];
+  const chapterCount = getChapterCount(chaptersState.activeSubject, chaptersState.filters);
 
   return (
-<div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
     <div className="flex flex-wrap gap-2">
       {/* Update filter buttons to be smaller on mobile */}

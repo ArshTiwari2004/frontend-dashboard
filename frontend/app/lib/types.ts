@@ -16,3 +16,17 @@ export interface Chapter {
 export interface ProcessedChapter extends Chapter {
   totalQuestions: number;
 }
+
+// Redux state types
+export interface FiltersState {
+  class: string[];
+  unit: string[];
+  status: string[];
+  weakChapters: boolean;
+}
+
+export interface ChaptersState {
+  activeSubject: "Physics" | "Chemistry" | "Mathematics";
+  filters: FiltersState;
+  sortOrder: "asc" | "desc";
+}

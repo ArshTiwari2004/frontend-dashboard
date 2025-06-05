@@ -10,7 +10,7 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0
   const trendDiff = trend2025 - trend2024
 
-  // Map chapter names to icons (you'll replace these with actual icons)
+ 
   const getChapterIcon = (chapterName: string) => {
     const iconMap: Record<string, string> = {
       Gravitation: "/icon1.svg",

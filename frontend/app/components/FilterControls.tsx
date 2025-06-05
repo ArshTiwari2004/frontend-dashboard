@@ -1,69 +1,73 @@
-"use client";
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+"use client"
+import { useDispatch, useSelector } from "react-redux"
 import {
   toggleClassFilter,
   toggleUnitFilter,
   toggleStatusFilter,
   toggleWeakChapters,
   toggleSortOrder,
-} from '../store/features/chaptersSlice';
-import { RootState } from '../store/store';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { getChapterCount, getUniqueClasses, getUniqueUnits } from '../lib/utils';
+} from "../store/features/chaptersSlice"
+import type { RootState } from "../store/store"
+import { ChevronDown, ArrowUpDown } from "lucide-react"
+import { getChapterCount, getUniqueClasses, getUniqueUnits } from "../lib/utils"
 
 const FilterControls = () => {
-  const dispatch = useDispatch();
-  const chaptersState = useSelector((state: RootState) => state.chapters);
-  const filters = chaptersState.filters;
-  const sortOrder = chaptersState.sortOrder;
-  
-  const classes = getUniqueClasses(chaptersState.activeSubject);
-  const units = getUniqueUnits(chaptersState.activeSubject);
-//   const statuses = ["Not Started", "Completed"];
-  const chapterCount = getChapterCount(chaptersState.activeSubject, chaptersState.filters);
+  const dispatch = useDispatch()
+  const chaptersState = useSelector((state: RootState) => state.chapters)
+  const filters = chaptersState.filters
+  const sortOrder = chaptersState.sortOrder
+
+  const classes = getUniqueClasses(chaptersState.activeSubject)
+  const units = getUniqueUnits(chaptersState.activeSubject)
+  const chapterCount = getChapterCount(chaptersState.activeSubject, chaptersState.filters)
 
   return (
     <div className="flex flex-col gap-4">
-  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-    <div className="flex flex-wrap gap-2">
-      {/* Update filter buttons to be smaller on mobile */}
-      <div className="relative group">
-        <button className="flex items-center gap-1 px-2 py-1 text-xs sm:text-sm rounded-md border border-gray-300 dark:border-gray-600">
-          Class
-          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-wrap gap-3">
+          {/* Class Filter */}
+          <div className="relative group">
+            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              Class
+              <ChevronDown className="w-4 h-4" />
             </button>
-            <div className="absolute z-10 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-md p-2 mt-1 min-w-[120px]">
+            <div className="absolute z-10 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-lg p-2 mt-1 min-w-[140px] border border-gray-200 dark:border-gray-700">
               {classes.map((cls) => (
-                <label key={cls} className="flex items-center gap-2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                <label
+                  key={cls}
+                  className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     checked={filters.class.includes(cls)}
                     onChange={() => dispatch(toggleClassFilter(cls))}
                     className="rounded text-blue-500"
                   />
-                  {cls}
+                  <span className="text-sm">{cls}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          {/* Unit Filter */}
+          {/* Units Filter */}
           <div className="relative group">
-            <button className="flex items-center gap-1 px-3 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-600">
+            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               Units
               <ChevronDown className="w-4 h-4" />
             </button>
-            <div className="absolute z-10 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-md p-2 mt-1 min-w-[120px]">
+            <div className="absolute z-10 hidden group-hover:block bg-white dark:bg-gray-800 shadow-lg rounded-lg p-2 mt-1 min-w-[140px] border border-gray-200 dark:border-gray-700">
               {units.map((unit) => (
-                <label key={unit} className="flex items-center gap-2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                <label
+                  key={unit}
+                  className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     checked={filters.unit.includes(unit)}
                     onChange={() => dispatch(toggleUnitFilter(unit))}
                     className="rounded text-blue-500"
                   />
-                  {unit}
+                  <span className="text-sm">{unit}</span>
                 </label>
               ))}
             </div>
@@ -71,10 +75,11 @@ const FilterControls = () => {
 
           {/* Not Started Filter */}
           <button
-            className={`px-3 py-1 text-sm rounded-md border ${filters.status.includes("Not Started")
-              ? "bg-blue-100 dark:bg-blue-900 border-blue-300 dark:border-blue-700"
-              : "border-gray-300 dark:border-gray-600"
-              }`}
+            className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+              filters.status.includes("Not Started")
+                ? "bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300"
+                : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+            }`}
             onClick={() => dispatch(toggleStatusFilter("Not Started"))}
           >
             Not Started
@@ -82,10 +87,19 @@ const FilterControls = () => {
 
           {/* Weak Chapters Filter */}
           <button
-            className={`px-3 py-1 text-sm rounded-md border ${filters.weakChapters
-              ? "bg-red-100 dark:bg-red-900 border-red-300 dark:border-red-700"
-              : "border-gray-300 dark:border-gray-600"
-              }`}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+              filters.weakChapters
+                ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-700 dark:text-orange-300"
+                : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border"
+            }`}
+            style={
+              filters.weakChapters
+                ? {
+                    border: "1px solid",
+                    borderImage: "linear-gradient(90deg, #D1D8E0 0%, #D1D8E0 50%, #FF881F 100%) 1",
+                  }
+                : {}
+            }
             onClick={() => dispatch(toggleWeakChapters())}
           >
             Weak Chapters
@@ -93,16 +107,19 @@ const FilterControls = () => {
         </div>
 
         {/* Sort Toggle */}
-<button
-  className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400"
-  onClick={() => dispatch(toggleSortOrder())}
->
-  Showing {chapterCount} chapters
-  {sortOrder === 'asc' ? <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4" /> : <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />}
-</button>
+        <button
+          className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+          onClick={() => dispatch(toggleSortOrder())}
+        >
+          <ArrowUpDown className="w-4 h-4" />
+          Sort
+        </button>
       </div>
-    </div>
-  );
-};
 
-export default FilterControls;
+      {/* Chapter Count */}
+      <div className="text-sm text-gray-600 dark:text-gray-400">Showing all chapters ({chapterCount})</div>
+    </div>
+  )
+}
+
+export default FilterControls

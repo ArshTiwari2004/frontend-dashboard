@@ -25,3 +25,6 @@ const ChapterList = () => {
     </div>
   );
 };
+
+
+export default ChapterList;

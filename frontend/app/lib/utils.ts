@@ -2,6 +2,11 @@ import data from "@/assets/data/all_subjects_chapter_data.json";
 import { Chapter } from "./types";
 import { RootState } from "../store/store";
 
+
+interface ProcessedChapter extends Chapter {
+  totalQuestions: number;
+}
+
 export const getFilteredChapters = (
   activeSubject: string,
   filters: {
@@ -11,18 +16,18 @@ export const getFilteredChapters = (
     weakChapters: boolean;
   },
   sortOrder: "asc" | "desc"
-): Chapter[] => {
+): ProcessedChapter[] => {
   // Filter by subject first
-  let filtered = data.filter((chapter) => chapter.subject === activeSubject);
+  let filtered = (data as Chapter[]).filter((chapter) => chapter.subject === activeSubject);
 
   // Calculate total questions for each chapter
-  filtered = filtered.map((chapter) => ({
+  const processed: ProcessedChapter[] = filtered.map((chapter) => ({
     ...chapter,
     totalQuestions: Object.values(chapter.yearWiseQuestionCount).reduce((a, b) => a + b, 0),
   }));
 
   // Apply filters
-  filtered = filtered.filter((chapter) => {
+  const result = processed.filter((chapter) => {
     // Filter by class
     if (filters.class.length > 0 && !filters.class.includes(chapter.class)) {
       return false;
@@ -47,7 +52,7 @@ export const getFilteredChapters = (
   });
 
   // Apply sorting
-  return filtered.sort((a, b) => {
+  return result.sort((a, b) => {
     if (sortOrder === "asc") {
       return a.chapter.localeCompare(b.chapter);
     } else {
@@ -56,25 +61,16 @@ export const getFilteredChapters = (
   });
 };
 
-// Get unique classes for current subject
-export const getUniqueClasses = (activeSubject: string) => {
-  return [...new Set(
-    data
-      .filter((chapter) => chapter.subject === activeSubject)
-      .map((chapter) => chapter.class)
-  )];
+export const getUniqueClasses = (activeSubject: string): string[] => {
+  const chapters = (data as Chapter[]).filter((chapter) => chapter.subject === activeSubject);
+  return Array.from(new Set(chapters.map((chapter) => chapter.class)));
 };
 
-// Get unique units for current subject
-export const getUniqueUnits = (activeSubject: string) => {
-  return [...new Set(
-    data
-      .filter((chapter) => chapter.subject === activeSubject)
-      .map((chapter) => chapter.unit)
-  )];
+export const getUniqueUnits = (activeSubject: string): string[] => {
+  const chapters = (data as Chapter[]).filter((chapter) => chapter.subject === activeSubject);
+  return Array.from(new Set(chapters.map((chapter) => chapter.unit)));
 };
 
-// Get chapter count for display
 export const getChapterCount = (
   activeSubject: string,
   filters: {
@@ -83,6 +79,6 @@ export const getChapterCount = (
     status: string[];
     weakChapters: boolean;
   }
-) => {
+): number => {
   return getFilteredChapters(activeSubject, filters, "desc").length;
 };

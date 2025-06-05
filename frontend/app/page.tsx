@@ -20,7 +20,7 @@ export default function Home() {
         <div className="lg:hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-3">
-              <button className="p-1">
+              <button className="p-1" title="Back" aria-label="Back">
                 <svg
                   width="24"
                   height="24"

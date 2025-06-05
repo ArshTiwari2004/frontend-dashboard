@@ -20,7 +20,7 @@ const FilterControls = () => {
   
   const classes = getUniqueClasses(chaptersState.activeSubject);
   const units = getUniqueUnits(chaptersState.activeSubject);
-  const statuses = ["Not Started", "Completed"];
+//   const statuses = ["Not Started", "Completed"];
   const chapterCount = getChapterCount(chaptersState.activeSubject, chaptersState.filters);
 
   return (

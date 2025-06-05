@@ -1,6 +1,6 @@
 import data from "../assets/data/all_subjects_chapter_data.json";
 import { Chapter } from "./types";
-import { RootState } from "@/app/store/store";
+// import { RootState } from "@/app/store/store";
 
 
 interface ProcessedChapter extends Chapter {
@@ -18,7 +18,7 @@ export const getFilteredChapters = (
   sortOrder: "asc" | "desc"
 ): ProcessedChapter[] => {
   // Filter by subject first
-  let filtered = (data as Chapter[]).filter((chapter) => chapter.subject === activeSubject);
+  const filtered = (data as Chapter[]).filter((chapter) => chapter.subject === activeSubject);
 
   // Calculate total questions for each chapter
   const processed: ProcessedChapter[] = filtered.map((chapter) => ({

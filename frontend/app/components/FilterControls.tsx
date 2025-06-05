@@ -15,7 +15,7 @@ const FilterControls = () => {
   const dispatch = useDispatch()
   const chaptersState = useSelector((state: RootState) => state.chapters)
   const filters = chaptersState.filters
-  const sortOrder = chaptersState.sortOrder
+  // const sortOrder = chaptersState.sortOrder
 
   const classes = getUniqueClasses(chaptersState.activeSubject)
   const units = getUniqueUnits(chaptersState.activeSubject)

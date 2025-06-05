@@ -54,7 +54,9 @@ const Sidebar = () => {
           {subjects.map((subject) => (
             <button
               key={subject.name}
-              onClick={() => dispatch(setActiveSubject(subject.name as any))}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+onClick={() => dispatch(setActiveSubject(subject.name as any))}
+
               className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all duration-200 group ${
                 subject.isActive
                   ? "bg-gray-900 dark:bg-gray-800 text-white shadow-lg"

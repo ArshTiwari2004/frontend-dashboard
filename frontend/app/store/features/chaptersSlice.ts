@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Chapter } from "@/lib/types";
+import { Chapter } from "@/app/lib/types";
 
 interface ChaptersState {
   activeSubject: "Physics" | "Chemistry" | "Mathematics";

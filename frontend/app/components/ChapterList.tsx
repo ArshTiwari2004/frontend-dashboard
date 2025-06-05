@@ -17,9 +17,7 @@ const ChapterList = () => {
   }
 
   return (
-    // want some gap between cards
-    
-    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden gap-4  ">
+    <div className="flex flex-col gap-4 sm:bg-white sm:dark:bg-gray-800 sm:rounded-lg sm:border sm:border-gray-200 sm:dark:border-gray-700 sm:overflow-hidden sm:gap-4">
       {chapters.map((chapter) => (
         <ChapterCard key={`${chapter.subject}-${chapter.chapter}`} chapter={chapter} />
       ))}

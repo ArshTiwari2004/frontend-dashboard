@@ -1,12 +1,15 @@
 import React from 'react';
-import { Chapter } from '../lib/types';
+import { ProcessedChapter } from '../lib/types';
 import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import * as PhosphorIcons from 'phosphor-react';
 
-// Type for Phosphor icons
 type PhosphorIcon = keyof typeof PhosphorIcons;
 
-const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
+interface ChapterCardProps {
+  chapter: ProcessedChapter;
+}
+
+const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const trend2025 = chapter.yearWiseQuestionCount["2025"] || 0;
   const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0;
   const trendDiff = trend2025 - trend2024;
@@ -51,7 +54,7 @@ const ChapterCard = ({ chapter }: { chapter: Chapter }) => {
                 : chapter.chapter}
             </h3>
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              <span>{chapter.questionSolved}/{chapter.totalQuestions} Qs</span>
+            <span>{chapter.questionSolved}/{chapter.totalQuestions} Qs</span>
               <span className="flex items-center">
                 {trendDiff > 0 ? (
                   <>

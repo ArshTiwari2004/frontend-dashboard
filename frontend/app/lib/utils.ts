@@ -1,6 +1,6 @@
 import data from "@/assets/data/all_subjects_chapter_data.json";
 import { Chapter } from "./types";
-import { RootState } from "../store/store";
+import { RootState } from "@/app/store/store";
 
 
 interface ProcessedChapter extends Chapter {

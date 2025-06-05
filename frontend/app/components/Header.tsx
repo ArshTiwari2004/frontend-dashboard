@@ -33,7 +33,7 @@ const Header = () => {
   const subjectInfo = getSubjectInfo()
 
   return (
-    <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-[#222E3F]">
+    <div className="p-6  dark:border-gray-700 bg-white dark:bg-[#222E3F] items-center justify-between flex flex-col ">
       <div className="flex items-center gap-3 mb-2">
         <img
           src={subjectInfo.icon}

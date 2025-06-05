@@ -32,11 +32,17 @@ const Sidebar = () => {
   return (
     <div className="w-80 h-screen bg-white dark:bg-[#222E3F] border-r border-gray-200 dark:border-gray-700 flex flex-col">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-6  border-gray-200 dark:border-gray-700 items-center justify-between flex flex-col">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">JEE Main</h1>
-          </div>
+          <div className="flex items-center  gap-3 ">
+  <img
+    src="/jeemain.svg"
+    alt="JEE Main Logo"
+    className="w-6 h-6 object-contain"
+  />
+  <h1 className="text-xl font-bold text-gray-900 dark:text-white ">JEE Main</h1>
+</div>
+
           <ThemeToggle />
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400">2025 - 2009 | 173 Papers | 15825 Qs</p>

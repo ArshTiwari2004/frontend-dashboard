@@ -1,4 +1,4 @@
-import data from "@/assets/data/all_subjects_chapter_data.json";
+import data from "../assets/data/all_subjects_chapter_data.json";
 import { Chapter } from "./types";
 import { RootState } from "@/app/store/store";
 

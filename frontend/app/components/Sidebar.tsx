@@ -59,7 +59,7 @@ onClick={() => dispatch(setActiveSubject(subject.name as any))}
 
               className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all duration-200 group ${
                 subject.isActive
-                  ? "bg-gray-900 dark:bg-gray-800 text-white shadow-lg"
+                  ? "bg-[color:var(--Q3-neutral-default,#1D2933)] dark:bg-gray-800 text-white shadow-lg"
                   : "hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-300"
               }`}
             >

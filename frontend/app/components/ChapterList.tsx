@@ -6,8 +6,12 @@ import ChapterCard from './ChapterCard';
 import { getFilteredChapters } from '../lib/utils';
 
 const ChapterList = () => {
-  const { activeSubject, filters, sortOrder } = useSelector((state: RootState) => state.chapters);
-  const chapters = getFilteredChapters(activeSubject, filters, sortOrder);
+  const chaptersState = useSelector((state: RootState) => state.chapters);
+  const chapters = getFilteredChapters(
+    chaptersState.activeSubject,
+    chaptersState.filters,
+    chaptersState.sortOrder
+  );
 
   if (chapters.length === 0) {
     return (
@@ -25,6 +29,5 @@ const ChapterList = () => {
     </div>
   );
 };
-
 
 export default ChapterList;

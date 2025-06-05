@@ -1,96 +1,79 @@
-import React from 'react';
-import { ProcessedChapter } from '../lib/types';
-import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
-import * as PhosphorIcons from 'phosphor-react';
-
-type PhosphorIcon = keyof typeof PhosphorIcons;
+import type React from "react"
+import type { ProcessedChapter } from "../lib/types"
 
 interface ChapterCardProps {
-  chapter: ProcessedChapter;
+  chapter: ProcessedChapter
 }
 
 const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
-  const trend2025 = chapter.yearWiseQuestionCount["2025"] || 0;
-  const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0;
-  const trendDiff = trend2025 - trend2024;
-  
-  // Map chapter names to icons
-  const getChapterIcon = (chapterName: string): PhosphorIcon => {
-    const iconMap: Record<string, PhosphorIcon> = {
-      "Gravitation": "Planet",
-      "Mathematics in Physics": "MathOperations",
-      "Units and Dimensions": "Ruler",
-      "Motion In One Dimension": "ArrowLineRight",
-      "Motion In Two Dimensions": "ArrowsOut",
-      "Laws of Motion": "Balloon",
-      "Work Power Energy": "BatteryHigh",
-      "Center of Mass Momentum and Collision": "CircleDashed",
-      "Rotational Motion": "CircleNotch",
-      "Mechanical Properties of Solids": "Cube",
-      "Mechanical Properties of Fluids": "Drop",
-      "Thermal Properties of Matter": "Thermometer",
-      "Thermodynamics": "Fire",
-      "Kinetic Theory of Gases": "Wind",
-      "Oscillations": "WaveSine",
-    };
+  const trend2025 = chapter.yearWiseQuestionCount["2025"] || 0
+  const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0
+  const trendDiff = trend2025 - trend2024
 
-    const defaultIcon = "Book";
-    return iconMap[chapterName] || defaultIcon;
-  };
+  // Map chapter names to icons (you'll replace these with actual icons)
+  const getChapterIcon = (chapterName: string) => {
+    const iconMap: Record<string, string> = {
+      Gravitation: "/icon1.svg",
+      "Mathematics in Physics": "/icon2.svg",
+      "Math in Physics": "/icon2.svg",
+      "Units and Dimensions": "/icon3.svg",
+      "Motion In One Dimension": "/icon4.svg",
+      "Motion in One Dimension long name": "/icon4.svg",
+      "Motion In Two Dimensions": "/icon5.svg",
+      "Motion in Two Dimensions": "/icon5.svg",
+      "Laws of Motion": "/icon6.svg",
+      "Work Power Energy": "/icon7.svg",
+      "Center of Mass Momentum and Collision": "/icon8.svg",
+      "Centre of Mass Equilibrium and...": "/icon8.svg",
+      "Rotational Motion": "/icon9.svg",
+      "Mechanical Properties of Solids": "/icon10.svg",
+      "Mechanical Properties of Fluids": "/icon11.svg",
+      "Thermal Properties of Matter": "/icon12.svg",
+      Thermodynamics: "/icon13.svg",
+      "Kinetic Theory of Gases": "/icon14.svg",
+      Oscillations: "/icon15.svg",
+    }
 
-  const IconComponent = PhosphorIcons[getChapterIcon(chapter.chapter)] as React.ElementType;
+    return iconMap[chapterName] || "/icon1.svg"
+  }
 
   return (
-<div className="chapter-card px-3 py-3 sm:px-4 sm:py-4">
-  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
-    <div className="flex items-center gap-2 sm:gap-3">
-      <span className="text-lg sm:text-xl">
-        <IconComponent size={20} className="sm:w-6 sm:h-6" weight="duotone" />
-      </span>
-          <div>
-            <h3 className="font-medium line-clamp-1">
-              {chapter.chapter.length > 25 
-                ? `${chapter.chapter.substring(0, 25)}...` 
-                : chapter.chapter}
-            </h3>
-            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <span>{chapter.questionSolved}/{chapter.totalQuestions} Qs</span>
-              <span className="flex items-center">
-                {trendDiff > 0 ? (
-                  <>
-                    <ArrowUp className="w-3 h-3 text-green-500" />
-                    <span className="text-green-500">↑</span>
-                  </>
-                ) : trendDiff < 0 ? (
-                  <>
-                    <ArrowDown className="w-3 h-3 text-red-500" />
-                    <span className="text-red-500">↓</span>
-                  </>
-                ) : (
-                  <Minus className="w-3 h-3 text-gray-500" />
-                )}
-                <span>2025: {trend2025}s</span>
-                <span> | 2024: {trend2024}s</span>
-              </span>
-            </div>
+    <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+      <div className="flex items-center gap-4 flex-1">
+        {/* Chapter Icon */}
+        <div className="w-6 h-6 flex-shrink-0">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-orange-500">
+            <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+            <path d="M12 1V3" stroke="currentColor" strokeWidth="2" />
+            <path d="M12 21V23" stroke="currentColor" strokeWidth="2" />
+            <path d="M4.22 4.22L5.64 5.64" stroke="currentColor" strokeWidth="2" />
+            <path d="M18.36 18.36L19.78 19.78" stroke="currentColor" strokeWidth="2" />
+            <path d="M1 12H3" stroke="currentColor" strokeWidth="2" />
+            <path d="M21 12H23" stroke="currentColor" strokeWidth="2" />
+            <path d="M4.22 19.78L5.64 18.36" stroke="currentColor" strokeWidth="2" />
+            <path d="M18.36 5.64L19.78 4.22" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        </div>
+
+        {/* Chapter Info */}
+        <div className="flex-1 min-w-0">
+          <h3 className="font-medium text-gray-900 dark:text-white text-base mb-1">{chapter.chapter}</h3>
+          <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <span>
+              2025: {trend2025}Qs {trendDiff > 0 ? "↑" : trendDiff < 0 ? "↓" : ""} | 2024: {trend2024}Qs
+            </span>
           </div>
         </div>
-        <div className="flex gap-2">
-          {chapter.status === "Completed" && (
-            <span className="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
-              ✔
-            </span>
-          )}
-          {chapter.isWeakChapter && (
-            <span className="px-2 py-1 text-xs rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
-              Weak
-            </span>
-          )}
-        </div>
+      </div>
+
+      {/* Right Side Info */}
+      <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+        <span>
+          {chapter.questionSolved}/{chapter.totalQuestions} Qs
+        </span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-
-export default ChapterCard;
+export default ChapterCard

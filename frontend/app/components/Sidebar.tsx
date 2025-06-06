@@ -45,7 +45,7 @@ const Sidebar = () => {
 
           <ThemeToggle />
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">2025 - 2009 | 173 Papers | 15825 Qs</p>
+        <p className="text-sm text-[#505D79] dark:text-[#B9BFD0]">2025 - 2009 | 173 Papers | 15825 Qs</p>
       </div>
 
       {/* Subject Navigation */}
@@ -59,7 +59,7 @@ onClick={() => dispatch(setActiveSubject(subject.name as any))}
 
               className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all duration-200 group ${
                 subject.isActive
-                  ? "bg-[color:var(--Q3-neutral-default,#1D2933)] dark:bg-gray-800 text-white shadow-lg"
+                  ? "bg-[color:var(--Q3-neutral-default,#1D2933)] dark:bg-[#1D2933] text-white shadow-lg"
                   : "hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-300"
               }`}
             >

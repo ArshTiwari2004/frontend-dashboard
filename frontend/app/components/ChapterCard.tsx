@@ -18,7 +18,7 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const chapterIcon = getRandomIcon()
 
   return (
-    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
+    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl border border-[#D1D8E0] dark:border-[#3E5574] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
       {/* Left Icon - stays on the left in both views */}
       <div className="flex-shrink-0 w-8 h-8 mr-3 sm:mr-4">
         <img
@@ -55,9 +55,9 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
     {trendDiff > 0 && <span className="text-green-500">↑</span>}
     {trendDiff < 0 && <span className="text-red-500">↓</span>}
   </span>
-  <span className="text-[#D1D8E0]">|  </span>
+  <span className="text-[#D1D8E0] dark:text-[#B9BFD0]">|  </span>
   <span>2024: {trend2024}Qs</span>
-  <span className="text-[#D1D8E0] pr-6 pl-4">|   </span>
+  <span className="text-[#D1D8E0] pr-6 pl-4 dark:text-[#3E5574]">|   </span>
 </div>
       </div>
 

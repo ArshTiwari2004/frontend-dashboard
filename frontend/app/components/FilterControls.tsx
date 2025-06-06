@@ -102,7 +102,7 @@ const FilterControls = () => {
             }
             onClick={() => dispatch(toggleWeakChapters())}
           >
-            Weak
+            Weak 
           </button>
         </div>
 
@@ -175,33 +175,36 @@ const FilterControls = () => {
             <button
               className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
                 filters.status.includes("Not Started")
-                  ? "bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300"
-                  : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  ? "bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300 "
+                  : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 "
               }`}
               onClick={() => dispatch(toggleStatusFilter("Not Started"))}
             >
               Not Started
             </button>
 
-            {/* Weak Chapters Filter */}
-            <button
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                filters.weakChapters
-                  ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-700 dark:text-orange-300"
-                  : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border"
-              }`}
-              style={
-                filters.weakChapters
-                  ? {
-                      border: "1px solid",
-                      borderImage: "linear-gradient(90deg, #D1D8E0 0%, #D1D8E0 50%, #FF881F 100%) 1",
-                    }
-                  : {}
-              }
-              onClick={() => dispatch(toggleWeakChapters())}
-            >
-              Weak Chapters
-            </button>
+<div
+  className="relative rounded-lg p-[1px] bg-transparent"
+  style={{
+    background: "linear-gradient(90deg, #D1D8E0 0%, #D1D8E0 50%, #FF881F 100%)",
+  }}
+>
+  <button
+    className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-gray-800
+      ${filters.weakChapters
+        ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-700 dark:text-orange-300"
+        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+      }
+    `}
+    onClick={() => dispatch(toggleWeakChapters())}
+  >
+    Weak Chapters
+  </button>
+</div>
+
+
+
+
           </div>
 
           {/* Sort Toggle */}

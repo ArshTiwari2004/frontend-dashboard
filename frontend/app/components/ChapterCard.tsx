@@ -10,7 +10,6 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const trend2024 = chapter.yearWiseQuestionCount["2024"] || 0
   const trendDiff = trend2025 - trend2024
 
-  // Returns a random icon from icon1.svg to icon6.svg
   const getRandomIcon = () => {
     const randomIndex = Math.floor(Math.random() * 6) + 1
     return `/icon${randomIndex}.svg`
@@ -19,35 +18,52 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const chapterIcon = getRandomIcon()
 
   return (
-    <div className="flex items-center justify-between p-4  dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:border-0 sm:border-b sm:border-gray-100 sm:dark:border-gray-700 sm:rounded-none sm:bg-transparent sm:dark:bg-transparent sm:hover:bg-gray-50 sm:dark:hover:bg-gray-800/50">
-      <div className="flex items-center gap-4 flex-1">
-        {/* Chapter Icon */}
-        <div className="w-6 h-6 flex-shrink-0">
-          <img
-            src={chapterIcon || "/placeholder.svg"}
-            alt={`${chapter.chapter} Icon`}
-            className="w-6 h-6 object-contain"
-          />
-        </div>
+    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
+      {/* Left Icon - stays on the left in both views */}
+      <div className="flex-shrink-0 w-8 h-8 mr-3 sm:mr-4">
+        <img
+          src={chapterIcon}
+          alt={`${chapter.chapter} Icon`}
+          className="w-full h-full object-contain"
+        />
+      </div>
 
-        {/* Chapter Info */}
-        <div className="flex-1 min-w-0">
-          <h3 className="font-medium text-gray-900 dark:text-white text-base mb-1">{chapter.chapter}</h3>
-          <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
-            <span>2025: {trend2025}Qs</span>
-            {trendDiff > 0 && <span className="text-green-500">↑</span>}
-            {trendDiff < 0 && <span className="text-red-500">↓</span>}
-            <span className="text-gray-400">|</span>
+      {/* Middle section (chapter name + trend) */}
+      <div className="flex flex-col flex-grow sm:flex-row sm:items-center sm:gap-4">
+        <div className="flex flex-col">
+          {/* Chapter Name */}
+          <h3 className="font-semibold text-gray-900 dark:text-white text-base sm:text-lg">
+            {chapter.chapter}
+          </h3>
+
+          {/* Trend info only visible in mobile (hidden on sm+) */}
+          <div className="flex sm:hidden gap-2 text-sm text-[#505D79] dark:text-gray-400 mt-1">
+            <span>
+              2025: {trend2025}Qs{" "}
+              {trendDiff > 0 && <span className="text-green-500">↑</span>}
+              {trendDiff < 0 && <span className="text-red-500">↓</span>}
+            </span>
+            <span className="text-[#D1D8E0]">|</span>
             <span>2024: {trend2024}Qs</span>
           </div>
         </div>
+
+        {/* Desktop trend info (visible only on sm+) */}
+      <div className="hidden sm:flex items-center gap-2 text-sm text-[#505D79] dark:text-gray-400 sm:text-base sm:ml-auto">
+  <span>
+    2025: {trend2025}Qs{" "}
+    {trendDiff > 0 && <span className="text-green-500">↑</span>}
+    {trendDiff < 0 && <span className="text-red-500">↓</span>}
+  </span>
+  <span className="text-[#D1D8E0]">|  </span>
+  <span>2024: {trend2024}Qs</span>
+  <span className="text-[#D1D8E0] pr-6 pl-4">|   </span>
+</div>
       </div>
 
-      {/* Right Side Info */}
-      <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-        <span>
-          {chapter.questionSolved}/{chapter.totalQuestions} Qs
-        </span>
+      {/* Solved Qs section: always on far right */}
+      <div className="text-sm text-[#505D79] dark:text-gray-400 sm:text-base ml-3 mt-2 sm:mt-0 sm:ml-0 whitespace-nowrap self-start sm:self-center">
+        {chapter.questionSolved}/{chapter.totalQuestions} Qs
       </div>
     </div>
   )

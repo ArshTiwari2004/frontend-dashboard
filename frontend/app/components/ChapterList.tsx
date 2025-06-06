@@ -10,14 +10,14 @@ const ChapterList = () => {
 
   if (chapters.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 text-center">
         <p className="text-gray-500 dark:text-gray-400">No chapters found matching your filters</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col gap-4 sm:bg-white sm:dark:bg-gray-800 sm:rounded-lg sm:border sm:border-gray-200 sm:dark:border-gray-700 sm:overflow-hidden sm:gap-4">
+    <div className="flex flex-col gap-3 sm:gap-4">
       {chapters.map((chapter) => (
         <ChapterCard key={`${chapter.subject}-${chapter.chapter}`} chapter={chapter} />
       ))}

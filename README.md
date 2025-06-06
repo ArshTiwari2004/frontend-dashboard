@@ -1,23 +1,14 @@
-# Assignment - Sample Task
+# Assignment - Sample Task - Frontend
 
-# Frontend-dashboard
+View the deployed project here: [Click Here](https://frontend-dashboard-nu-azure.vercel.app/)
 
+## Project Structure 
 
+- All **Mock JSON Data** is stored in the file:  
+  `assets/data/all_subjects_chapter_data.json`
 
-## Tech Stack
-
-- Next.js (App Router)  
-- Tailwind CSS  
-- Redux (or any other state management tool)  
-- shadcn/ui for components  
-- Responsive UI with dark mode toggle  
-- Integration of mock JSON data  
-
-
-
-
-
-
+- All **Tailwind CSS configuration** is located in:  
+  `tailwind.config.js`
 
 
 # Installation Guide
@@ -47,5 +38,26 @@ npm run dev
 ```
 
 5. Open your browser and go to http://localhost:3000 to see the project running.
+
+
+
+## Tech Stack
+
+- Next.js (App Router)  
+- Tailwind CSS  
+- Redux (or any other state management tool)  
+- shadcn/ui for components  
+- Responsive UI with dark mode toggle  
+- Integration of mock JSON data  
+
+
+
+
+
+
+
+
+
+
 
 

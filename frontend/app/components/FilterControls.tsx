@@ -208,17 +208,18 @@ const FilterControls = () => {
           </div>
 
           {/* Sort Toggle */}
-          <button
-            className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-            onClick={() => dispatch(toggleSortOrder())}
-          >
-            <ArrowUpDown className="w-4 h-4" />
-            Sort
-          </button>
+      <button
+  className="mt-4 flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+  onClick={() => dispatch(toggleSortOrder())}
+>
+  <ArrowUpDown className="w-4 h-4" />
+  Sort
+</button>
+
         </div>
 
         {/* Chapter Count */}
-        <div className="text-sm text-gray-600 dark:text-gray-400 mt-4">Showing all chapters ({chapterCount})</div>
+        <div className="text-sm text-[#101319] dark:text-gray-400 mt-8 mb-3 fontweight-400 font-normal  ">Showing all chapters ({chapterCount})</div>
       </div>
     </div>
   )

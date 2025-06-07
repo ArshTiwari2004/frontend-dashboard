@@ -6,6 +6,8 @@ import { ThemeProvider } from "./providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// I have applied font inter globally to maintain consistency across the app.
+
 export const metadata: Metadata = {
   title: "JEE Main PYQs",
   description: "Practice previous year questions for JEE Main",

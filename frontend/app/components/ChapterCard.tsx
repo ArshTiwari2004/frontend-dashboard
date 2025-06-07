@@ -18,7 +18,7 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const chapterIcon = getRandomIcon()
 
   return (
-    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl sm:border border-[#D1D8E0] dark:sm:border-[#3E5574] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
+    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl sm:border sm:border-[#D1D8E0] dark:sm:border-[#3E5574] hover:bg-gray-50 dark:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
       {/* Left Icon - stays on the left in both views */}
       <div className="flex-shrink-0 w-8 h-8 mr-3 sm:mr-4">
         <img

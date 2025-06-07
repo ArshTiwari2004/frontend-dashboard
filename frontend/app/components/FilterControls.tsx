@@ -183,43 +183,40 @@ const FilterControls = () => {
               Not Started
             </button>
 
-<div
-  className="relative rounded-lg p-[1px] bg-transparent"
-  style={{
-    background: "linear-gradient(90deg, #D1D8E0 0%, #D1D8E0 50%, #FF881F 100%)",
-  }}
->
-  <button
-    className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-gray-800
-      ${filters.weakChapters
-        ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-700 dark:text-orange-300"
-        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-      }
-    `}
-    onClick={() => dispatch(toggleWeakChapters())}
-  >
-    Weak Chapters
-  </button>
-</div>
-
-
-
-
+            <div
+              className="relative rounded-lg p-[1px] bg-transparent"
+              style={{
+                background: "linear-gradient(90deg, #D1D8E0 0%, #D1D8E0 50%, #FF881F 100%)",
+              }}
+            >
+              <button
+                className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-gray-800
+                  ${filters.weakChapters
+                    ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 text-orange-700 dark:text-orange-300"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                  }
+                `}
+                onClick={() => dispatch(toggleWeakChapters())}
+              >
+                Weak Chapters
+              </button>
+            </div>
           </div>
-
-          {/* Sort Toggle */}
-      <button
-  className="mt-4 flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-  onClick={() => dispatch(toggleSortOrder())}
->
-  <ArrowUpDown className="w-4 h-4" />
-  Sort
-</button>
-
         </div>
 
-        {/* Chapter Count */}
-        <div className="text-sm text-[#101319] dark:text-gray-400 mt-8 mb-3 fontweight-400 font-normal  ">Showing all chapters ({chapterCount})</div>
+        {/* Chapter Count and Sort for Desktop */}
+        <div className="flex items-center justify-between mt-8 mb-4">
+          <div className="text-sm text-[#101319] dark:text-gray-400 fontweight-400 font-normal">
+            Showing all chapters ({chapterCount})
+          </div>
+          <button
+            className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+            onClick={() => dispatch(toggleSortOrder())}
+          >
+            <ArrowUpDown className="w-4 h-4" />
+            Sort
+          </button>
+        </div>
       </div>
     </div>
   )

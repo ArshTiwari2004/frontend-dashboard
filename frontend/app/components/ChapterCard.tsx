@@ -18,7 +18,7 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
   const chapterIcon = getRandomIcon()
 
   return (
-    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl border border-[#D1D8E0] dark:border-[#3E5574] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
+    <div className="flex sm:items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl sm:border border-[#D1D8E0] dark:sm:border-[#3E5574] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors sm:flex-row sm:p-6 sm:rounded-2xl">
       {/* Left Icon - stays on the left in both views */}
       <div className="flex-shrink-0 w-8 h-8 mr-3 sm:mr-4">
         <img
@@ -49,16 +49,16 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
         </div>
 
         {/* Desktop trend info (visible only on sm+) */}
-      <div className="hidden sm:flex items-center gap-2 text-sm text-[#505D79] dark:text-gray-400 sm:text-base sm:ml-auto">
-  <span>
-    2025: {trend2025}Qs{" "}
-    {trendDiff > 0 && <span className="text-green-500">↑</span>}
-    {trendDiff < 0 && <span className="text-red-500">↓</span>}
-  </span>
-  <span className="text-[#D1D8E0] dark:text-[#B9BFD0]">|  </span>
-  <span>2024: {trend2024}Qs</span>
-  <span className="text-[#D1D8E0] pr-6 pl-4 dark:text-[#3E5574]">|   </span>
-</div>
+        <div className="hidden sm:flex items-center gap-2 text-sm text-[#505D79] dark:text-gray-400 sm:text-base sm:ml-auto">
+          <span>
+            2025: {trend2025}Qs{" "}
+            {trendDiff > 0 && <span className="text-green-500">↑</span>}
+            {trendDiff < 0 && <span className="text-red-500">↓</span>}
+          </span>
+          <span className="text-[#D1D8E0] dark:text-[#B9BFD0]">|  </span>
+          <span>2024: {trend2024}Qs</span>
+          <span className="text-[#D1D8E0] pr-6 pl-4 dark:text-[#3E5574]">|   </span>
+        </div>
       </div>
 
       {/* Solved Qs section: always on far right */}

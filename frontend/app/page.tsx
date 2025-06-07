@@ -5,6 +5,7 @@ import Header from "./components/Header"
 import Sidebar from "./components/Sidebar"
 import { MobileFilters } from "./components/MobileFilters"
 import { ThemeToggle } from "./components/ThemeToggle"
+// import { ArrowLeft } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
@@ -18,29 +19,25 @@ export default function Home() {
       <div className="flex-1 lg:ml-0">
         {/* Mobile Header */}
         <div className="lg:hidden">
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3">
-              <button className="p-1" title="Back" aria-label="Back">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="text-gray-600 dark:text-gray-400"
-                >
-                  <path
-                    d="M15 18L9 12L15 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <h1 className="text-lg font-semibold text-gray-900 dark:text-white">JEE Main</h1>
-            </div>
+          <div className="relative flex items-center justify-between p-4  dark:border-gray-700">
+            {/* Back Button */}
+      <button className="p-1 z-10" title="Back" aria-label="Back">
+  <img
+    src="/arrowleft.svg"
+    alt="Back"
+    className="w-6 h-6 text-gray-600 dark:text-gray-400"
+  />
+</button>
+
+            {/* Centered Title */}
+            <h1 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold text-[#101319] dark:text-white">
+              JEE Main
+            </h1>
+
+            {/* Theme Toggle */}
             <ThemeToggle />
           </div>
+
           <SubjectTabs />
         </div>
 
